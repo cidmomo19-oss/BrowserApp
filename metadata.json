@@ -1,0 +1,6 @@
+{
+  "name": "Video Sniffer Browser",
+  "description": "Android web browser with video stream sniffer, adblocker, DNS over HTTPS, and media downloader.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

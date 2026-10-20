@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Top Browser Navigation Bar -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            app:elevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
+
+                <!-- User Agent Toggle (Mobile / Desktop) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_user_agent"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="📱 Mobile"
+                    android:textSize="11sp"
+                    android:contentDescription="Toggle Desktop or Mobile User Agent" />
+
+                <!-- URL / Search Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    app:boxBackgroundColor="#2C2C2C"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:hint="Search or enter URL..."
+                        android:imeOptions="actionGo"
+                        android:inputType="textUri"
+                        android:maxLines="1"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="13sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Reload Button -->
+                <ImageButton
+                    android:id="@+id/btn_reload"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Reload Page"
+                    android:src="@android:drawable/ic_popup_sync"
+                    app:tint="#FFFFFF" />
+
+                <!-- Adblock Toggle Button -->
+                <ImageButton
+                    android:id="@+id/btn_adblock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Adblock Toggle"
+                    android:src="@android:drawable/ic_menu_manage"
+                    app:tint="#4CAF50" />
+
+            </LinearLayout>
+
+            <!-- Multi-Tab Strip -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#181818"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
+
+                <HorizontalScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/layout_tab_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <!-- New Tab Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_new_tab"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="+ Tab"
+                    android:textColor="#80D8FF"
+                    android:textSize="12sp"
+                    android:contentDescription="Open new tab" />
+
+            </LinearLayout>
+
+            <!-- Page Loading Progress Bar -->
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/loading_progress"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:visibility="gone"
+                app:indicatorColor="#1A73E8"
+                app:trackColor="#333333" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- WebView Container supporting multiple tabs -->
+        <FrameLayout
+            android:id="@+id/webview_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#121212" />
+
+        <!-- Bottom Navigation & Anti-Block Info Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#1E1E1E"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
+
+            <!-- Back -->
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:src="@android:drawable/ic_media_previous"
+                app:tint="#FFFFFF" />
+
+            <!-- Forward -->
+            <ImageButton
+                android:id="@+id/btn_forward"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Forward"
+                android:src="@android:drawable/ic_media_next"
+                app:tint="#FFFFFF" />
+
+            <!-- Home -->
+            <ImageButton
+                android:id="@+id/btn_home"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Home"
+                android:src="@android:drawable/ic_menu_today"
+                app:tint="#FFFFFF" />
+
+            <!-- DoH DNS Shield indicator -->
+            <TextView
+                android:id="@+id/tv_dns_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="🛡️ Cloudflare DoH 1.1.1.1 Active"
+                android:textColor="#80D8FF"
+                android:textSize="11sp" />
+
+            <!-- Sniffed Videos Counter -->
+            <TextView
+                android:id="@+id/tv_sniffer_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Videos: 0"
+                android:textColor="#B0BEC5"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Floating Action Button for Detected Media -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="#E53935"
+        android:text="Download (0)"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        app:icon="@android:drawable/stat_sys_download"
+        app:iconTint="#FFFFFF"
+        tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

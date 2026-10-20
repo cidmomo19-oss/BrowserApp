@@ -1,0 +1,3 @@
+#!/bin/sh
+# FFmpeg stub binary for HLS merge
+echo "FFmpeg native binary"

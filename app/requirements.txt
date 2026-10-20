@@ -1,0 +1,2 @@
+# requirements.txt for yt-dlp integration via Chaquopy
+yt-dlp
